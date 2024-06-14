@@ -1,0 +1,94 @@
+﻿@model DongHoDemo2.ModelViews.RegisterVM
+@{
+    ViewData["Title"] = "Đăng ký tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3"><span class="px-2">ĐĂNG KÝ TÀI KHOẢN</span></h1>
+    </div>
+</div>
+<div id="wrapper">
+    <div class="container">
+        <div class="row justify-content-around">
+            <form asp-action="DangKyTaiKhoan" class="col-md-6 p-3" style="background-color: blanchedalmond">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="alert-link" style="color: forestgreen">Họ và tên:</label>
+                    <input type="text" asp-for="FullName" class="form-control" placeholder="Họ và tên" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="alert-link" style="color: forestgreen">Địa chỉ Email:</label>
+                    <input type="email" asp-for="Email" class="form-control" placeholder="Địa chỉ Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="alert-link" style="color: forestgreen">Số điện thoại:</label>
+                    <input type="tel" asp-for="Phone" class="form-control" placeholder="Số điện thoại" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="alert-link" style="color: forestgreen">Mật khẩu:</label>
+                    <input type="password" asp-for="Password" class="form-control" placeholder="Mật khẩu" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="alert-link" style="color: forestgreen">Nhập lại mật khẩu:</label>
+                    <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="Nhập lại mật khẩu" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Đăng ký" class="btn btn-success btn btn-block" />
+                </div>
+                <div class="form-group" style="text-align: center">
+                    <p>Bạn đã có tài khoản? <a href="dang-nhap.html"> Đăng nhập</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@*<h2>DangKyTaiKhoan</h2>
+
+<h4>RegisterVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DangKyTaiKhoan">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+*@

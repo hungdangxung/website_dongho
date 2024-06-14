@@ -1,0 +1,54 @@
+﻿<div class="container-fluid">
+    <div class="row align-items-center py-3 px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+            <a href="/" class="text-decoration-none">
+                <h2 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold px-3 mr-1">Watch Store</span></h2>
+            </a>
+        </div>
+        <div class="col-lg-6 col-6 text-left">
+            <form action="">
+                <div class="input-group">
+                    <input type="text" name="txtSearch" id="txtSearch" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                    <div class="input-group-append" id="btnSearch">
+                        <span class="input-group-text bg-transparent text-primary">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-3 col-6 text-right">
+            <a href="" class="btn border">
+                <i class="fas fa-heart text-primary"></i>
+                <span class="badge">0</span>
+            </a>
+            @await Component.InvokeAsync("NumberCart")
+        </div>
+    </div>
+</div>
+@*@section Srcipts {
+    <script>
+        $(document).ready(function () {
+            $("#btnSearch").click(function () {
+                var keyword = $("#txtKeyword").val();
+                $.ajax({
+                    type: "GET",
+                    url: "/Product/SearchProduct",
+                    data: { keyword: keyword },
+                    dataType: "json",
+                    success: function (data) {
+                        var html = "";
+                        $.each(data, function (index, item) {
+                            html += "<tr>";
+                            html += "<td>" + item.Name + "</td>";
+                            html += "<td>" + item.Price + "</td>";
+                            html += "<td>" + item.Description + "</td>";
+                            html += "</tr>";
+                        });
+                        $("#productTable tbody").html(html);
+                    }
+                });
+            });
+        });
+    </script>
+}*@

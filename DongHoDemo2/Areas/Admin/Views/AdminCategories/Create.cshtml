@@ -1,0 +1,47 @@
+﻿@model DongHoDemo2.Models.Category
+
+@{
+    ViewData["Title"] = "Thêm mới danh mục";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="header">
+    <h1 class="page-header">
+        Thêm mới danh mục
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+        <li><a asp-area="Admin" asp-controller="AdminCategories" asp-action="Index">Quản lý danh mục</a></li>
+        <li><a asp-area="Admin" asp-controller="AdminCategories" asp-action="Create">Thêm mới danh mục</a></li>
+    </ol>
+</div>
+<form asp-controller="AdminCategories" asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="card">
+        <div class="card-content">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td> <b>Tên danh mục:</b></td>
+                            <td> <input type="text" class="form-control" asp-for="CatName" placeholder="Tên danh mục"></td>
+                        </tr>
+                        <tr>
+                            <td> <b>Ảnh đại diện:</b></td>
+                            <td>
+                                <input name="fThumb" type="file" class="form-control-file" asp-for="Thumb">
+                                <span asp-validation-for="Thumb" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> <b>Mô tả:</b></td>
+                            <td> <input type="text" class="form-control" asp-for="Desciption" placeholder="Mô tả"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a class="btn btn-success btn-group m-md-3" asp-action="Index">Quay lại</a>
+            <button type="submit" class="btn btn-primary">Thêm mới</button>
+        </div>
+    </div>
+</form>
+

@@ -1,0 +1,66 @@
+﻿@model DongHoDemo2.Models.Customer
+
+@{
+    ViewData["Title"] = "Chi tiết khách hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="header">
+    <h1 class="page-header">
+        Chi tiết khách hàng
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+        <li><a asp-area="Admin" asp-controller="AdminCustomers" asp-action="Index">Quản lý khách hàng</a></li>
+        <li><a asp-area="Admin" asp-controller="AdminCustomers" asp-action="Details">Chi tiết khách hàng</a></li>
+    </ol>
+</div>
+<div class="card">
+    <div class="card-content">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <td><b> ID:</b> </td>
+                        <td> @Model.CustomerId</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Tên khách hàng:</b></td>
+                        <td> @Model.FullName</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Địa chỉ:</b></td>
+                        <td> @Model.Address</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Email:</b></td>
+                        <td> @Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Phone:</b></td>
+                        <td> @Model.Phone</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Trạng thái:</b></td>
+                        <td>
+                            @if (Model.Active)
+                            {
+                                <div class="d-flex align-items-center">
+                                    <div class="badge badge-success badge-dot m-r-10"></div>
+                                    <div><b style="color: forestgreen">Hoạt động</b></div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="d-flex align-items-center">
+                                    <div class="badge badge-success badge-dot m-r-10"></div>
+                                    <div><b style="color: red">Ngừng hoạt động</b></div>
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a class="btn btn-success btn-group m-md-3" asp-action="Index">Quay lại</a>
+    </div>
+</div>

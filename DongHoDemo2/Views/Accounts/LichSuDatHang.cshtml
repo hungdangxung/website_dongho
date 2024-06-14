@@ -1,0 +1,182 @@
+﻿@model DongHoDemo2.Models.Customer
+
+@{
+    ViewData["Title"] = "Lịch sử đặt hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Category> allCategories = ViewBag.AllCategories;
+    List<Order> allOrders = ViewBag.ListOrder;
+}
+<div class="container-fluid">
+    <div class="row border-top px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+            <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                <h6 class="m-0">Danh mục sản phẩm</h6>
+                <i class="fa fa-angle-down text-dark"></i>
+            </a>
+            <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
+                <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
+                    @foreach (var item in allCategories)
+                    {
+                        string url = $"/{item.CatName}";
+                        <a href="@url" class="nav-item nav-link">@item.CatName</a>
+                    }
+                </div>
+            </nav>
+        </div>
+        <div class="col-lg-9">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav mr-auto py-0">
+                        <a asp-controller="Home" asp-action="Index" class="nav-item nav-link">Trang chủ</a>
+                        <a asp-controller="Product" asp-action="Index" class="nav-item nav-link">Sản phẩm</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Tài khoản</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a asp-action="Dashboard" asp-controller="Accounts" class="dropdown-item">Trang cá nhân</a>
+                                    <a asp-action="Logout" asp-controller="Accounts" class="dropdown-item">Đăng xuất</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Tài khoản</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a asp-action="Login" asp-controller="Accounts" class="dropdown-item">Đăng nhập</a>
+                                    <a asp-action="DangKyTaiKhoan" asp-controller="Accounts" class="dropdown-item">Đăng ký</a>
+                                </div>
+                            </div>
+                        }
+                        <a asp-controller="Home" asp-action="Contact" class="nav-item nav-link">Liên hệ</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3"><span class="px-2">Đơn hàng của bạn</span></h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="/">Trang chủ</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0">Tài khoản của tôi</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mb-5">
+    <div class="row border-top px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+            <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+                <div class="navbar-nav w-100 overflow-hidden" style="height: 310px">
+                    <a href="tai-khoan-cua-toi.html" class="nav-item nav-link">Thông tin tài khoản</a>
+                    <a href="doi-mk.html" class="nav-item nav-link">Đổi mật khẩu</a>
+                    <a href="dia-chi-giao-hang.html" class="nav-item nav-link">Địa chỉ giao hàng</a>
+                    <a href="lich-su-dat-hang.html" class="nav-item nav-link active">Lịch sử đặt hàng</a>
+                </div>
+            </nav>
+        </div>
+        <div class="col-lg-9">
+            <div class="card">
+                <div class="card-content">
+                    @if (allOrders != null && allOrders.Count() > 0)
+                    {
+                        <div class="table-responsive">
+                            <table class="table border-1 table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th>Mã đơn hàng</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Trạng thái</th>
+                                        <th>Chức năng</th>
+                                    </tr>
+                                    @foreach (var item in allOrders)
+                                    {
+                                        string url = $"OrderDetail-{item.OrderId}.html";
+                                        <tr>
+                                            <td><a class="account-order-id">@item.OrderId</a></td>
+                                            <td>@item.Customer.FullName</td>
+                                            <td>@item.Total.Value.ToString("#,##0") VNĐ</td>
+                                            <td>@item.OrderDate.Value.ToString("dd/MM/yyyy")</td>
+                                            <td>@item.TransactStatus.Status</td>
+                                            <td class="d-flex">
+                                                <a href="javascript:void(0)" class="xemdonhang btn btn-success" data-madh="@item.OrderId" style="width: 100px; height: 40px; margin-right: 5px"><span>Xem đơn</span></a>
+                                                @if (@item.TransactStatus.Status.TrimEnd() == "Chờ xử lý")
+                                                {
+                                                    <button data-madh="@item.OrderId" class="huydonhang btn btn-danger" style="width: 100px; height: 40px;"><span>Hủy đơn</span></button>
+                                                }
+                                                else
+                                                {
+                                                    <button class="btn btn-danger disabled" style="width: 100px; height: 40px;"><span>Hủy đơn</span></button>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <h3 style="text-align: center">Bạn chưa có đơn hàng nào!</h3>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <hr />
+    <div id="records_table">
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".xemdonhang").click(function () {
+                var madonhang = $(this).attr("data-madh")
+                $.ajax({
+                    url: '/DonHang/Details',
+                    datatype: "json",
+                    type: "POST",
+                    data: { id: madonhang },
+                    async: true,
+                    success: function (results) {
+                        $("#records_table").html("");
+                        $("#records_table").html(results);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+            $(".huydonhang").click(function () {
+                var madonhang = $(this).attr("data-madh")
+                $.ajax({
+                    url: '@Url.Action("HuyDonHang", "Checkout")',
+                    datatype: "JSON",
+                    type: "POST",
+                    data: { id: madonhang },
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.message);
+                            window.location = 'lich-su-dat-hang.html';
+                            @*location.reload();*@
+                        }
+                        else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+        });
+    </script>
+}

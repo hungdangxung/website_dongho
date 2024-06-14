@@ -1,0 +1,15 @@
+﻿@model List<DongHoDemo2.ModelViews.CartItem>
+@if (Model != null && Model.Count() > 0)
+{
+    <a href="cart.html" class="btn border">
+        <i class="fas fa-shopping-cart text-primary"></i>
+        <span class="badge">@Model.Count()</span>
+    </a>
+}
+else
+{
+    <a href="cart.html" class="btn border">
+        <i class="fas fa-shopping-cart text-primary"></i>
+        <span class="badge">0</span>
+    </a>
+}

@@ -1,0 +1,73 @@
+﻿@model DongHoDemo2.Models.Product
+
+@{
+    ViewData["Title"] = "Xóa sản phẩm" + Model.ProductName;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="header">
+    <h1 class="page-header">
+        Xóa sản phẩm @Model.ProductName
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+        <li><a asp-area="Admin" asp-controller="AdminProducts" asp-action="Index">Quản lý sản phẩm</a></li>
+        <li><a asp-area="Admin" asp-controller="AdminProducts" asp-action="Delete">Xóa sản phẩm</a></li>
+    </ol>
+</div>
+<div class="card">
+    <div class="card-content">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <td><b> ID:</b> </td>
+                        <td> @Model.ProductId</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Tên sản phẩm:</b></td>
+                        <td> @Model.ProductName</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Ảnh sản phẩm:</b></td>
+                        <td>
+                            <img width="100" height="100" src="~/images/products/@Model.Thumb" alt="@Model.ProductName" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <b>Danh mục:</b></td>
+                        <td> @Model.Cat.CatName</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Giá bán:</b></td>
+                        <td> @Model.Price</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Giá khuyến mại:</b></td>
+                        <td> @Model.Discount</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Số lượng:</b></td>
+                        <td> @Model.UnitslnStock</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Mô tả:</b></td>
+                        <td> @Model.Description</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Ngày tạo:</b></td>
+                        <td> @Model.DateCreated</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Ngày sửa đổi:</b></td>
+                        <td> @Model.DateModified</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <form asp-action="Delete" asp-route-id="@Model.ProductId">
+            <a class="btn btn-success btn-group m-md-3" asp-action="Index">Quay lại</a>
+            <input type="hidden" asp-for="ProductId" />
+            <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+        </form>
+    </div>
+</div>

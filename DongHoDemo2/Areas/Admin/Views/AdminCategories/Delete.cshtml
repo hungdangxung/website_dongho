@@ -1,0 +1,49 @@
+﻿@model DongHoDemo2.Models.Category
+
+@{
+    ViewData["Title"] = "Xóa danh mục";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="header">
+    <h1 class="page-header">
+        Xóa danh mục sản phẩm
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+        <li><a asp-area="Admin" asp-controller="AdminCategories" asp-action="Index">Quản lý danh mục sản phẩm</a></li>
+        <li><a asp-area="Admin" asp-controller="AdminCategories" asp-action="Delete">Xóa danh mục</a></li>
+    </ol>
+</div>
+<div class="card">
+    <div class="card-content">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <td><b> ID:</b> </td>
+                        <td> @Model.CatId</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Tên danh mục:</b></td>
+                        <td> @Model.CatName</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Ảnh sản phẩm:</b></td>
+                        <td>
+                            <img width="100" height="100" src="~/images/categories/@Model.Thumb" alt="@Model.CatName" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <b>Mô tả:</b></td>
+                        <td> @Model.Desciption</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <form asp-action="Delete" asp-route-id="@Model.CatId">
+            <a class="btn btn-success btn-group m-md-3" asp-action="Index">Quay lại</a>
+            <input type="hidden" asp-for="CatId" />
+            <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+        </form>
+    </div>
+</div>

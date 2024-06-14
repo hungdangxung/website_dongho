@@ -1,0 +1,43 @@
+﻿@model DongHoDemo2.Models.Role
+
+@{
+    ViewData["Title"] = "Xoá quyền truy cập";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="header">
+    <h1 class="page-header">
+        Xóa quyền truy cập
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+        <li><a asp-area="Admin" asp-controller="AdminRoles" asp-action="Index">Quản lý quyền truy cập</a></li>
+        <li><a asp-area="Admin" asp-controller="AdminRoles" asp-action="Delete">Xóa quyền truy cập</a></li>
+    </ol>
+</div>
+<div class="card">
+    <div class="card-content">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <td><b> ID:</b> </td>
+                        <td> @Model.RoleId</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Vai trò:</b></td>
+                        <td> @Model.RoleName</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Mô tả:</b></td>
+                        <td> @Model.Description</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <form asp-action="Delete" asp-route-id="@Model.RoleId">
+            <a class="btn btn-success btn-group m-md-3" asp-action="Index">Quay lại</a>
+            <input type="hidden" asp-for="RoleId" />
+            <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+        </form>
+    </div>
+</div>

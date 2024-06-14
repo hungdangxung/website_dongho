@@ -1,0 +1,40 @@
+﻿@model DongHoDemo2.Models.Promotion
+
+@{
+    ViewData["Title"] = "Thêm mới khuyến mại";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="header">
+    <h1 class="page-header">
+        Thêm mới khuyến mại
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+        <li><a asp-area="Admin" asp-controller="AdminPromotions" asp-action="Index">Quản lý khuyến mại</a></li>
+        <li><a asp-area="Admin" asp-controller="AdminPromotions" asp-action="Create">Thêm mới khuyến mại</a></li>
+    </ol>
+</div>
+<form asp-controller="AdminPromotions" asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="card">
+        <div class="card-content">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td> <b>Tên khuyến mại:</b></td>
+                            <td> <input type="text" class="form-control" asp-for="PromotionName" placeholder="Tên khuyến mại"></td>
+                        </tr>
+                        <tr>
+                            <td> <b>Giá trị khuyến mại:</b></td>
+                            <td> <input type="text" class="form-control" asp-for="PromotionPrice" placeholder="Giá trị khuyến mại"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a class="btn btn-success btn-group m-md-3" asp-action="Index">Quay lại</a>
+            <button type="submit" class="btn btn-primary">Thêm mới</button>
+        </div>
+    </div>
+</form>
+

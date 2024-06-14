@@ -1,0 +1,38 @@
+﻿@model DongHoDemo2.ModelViews.LoginVM
+@{
+    ViewData["Title"] = "LoginAdmin";
+    Layout = "~/Areas/Admin/Views/Shared/_LoginLayout.cshtml";
+}
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3"><span class="px-2">ĐĂNG NHẬP TRANG QUẢN LÝ</span></h1>
+    </div>
+</div>
+<div id="wrapper">
+    <div class="container">
+        <div class="row justify-content-around">
+            <form asp-action="LoginAdmin" method="post" class="col-md-6 p-3" style="background-color: blanchedalmond">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="alert-link" style="color: forestgreen">Địa chỉ Email:</label>
+                    <input type="text" asp-for="UserName" class="form-control" placeholder="Địa chỉ Email" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="alert-link" style="color: forestgreen">Mật khẩu:</label>
+                    <input type="password" asp-for="Password" class="form-control" placeholder="Mật khẩu" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Đăng nhập" class="btn btn-success btn btn-block" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+    </div>
+</div>

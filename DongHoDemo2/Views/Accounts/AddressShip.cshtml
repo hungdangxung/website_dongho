@@ -1,0 +1,109 @@
+﻿@model DongHoDemo2.Models.Customer
+
+@{
+    ViewData["Title"] = "Địa chỉ giao hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Category> allCategories = ViewBag.AllCategories;
+}
+<div class="container-fluid">
+    <div class="row border-top px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+            <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                <h6 class="m-0">Danh mục sản phẩm</h6>
+                <i class="fa fa-angle-down text-dark"></i>
+            </a>
+            <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
+                <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
+                    @foreach (var item in allCategories)
+                    {
+                        string url = $"/{item.CatName}";
+                        <a href="@url" class="nav-item nav-link">@item.CatName</a>
+                    }
+                </div>
+            </nav>
+        </div>
+        <div class="col-lg-9">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav mr-auto py-0">
+                        <a asp-controller="Home" asp-action="Index" class="nav-item nav-link">Trang chủ</a>
+                        <a asp-controller="Product" asp-action="Index" class="nav-item nav-link">Sản phẩm</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Tài khoản</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a asp-action="Dashboard" asp-controller="Accounts" class="dropdown-item">Trang cá nhân</a>
+                                    <a asp-action="Logout" asp-controller="Accounts" class="dropdown-item">Đăng xuất</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Tài khoản</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a asp-action="Login" asp-controller="Accounts" class="dropdown-item">Đăng nhập</a>
+                                    <a asp-action="DangKyTaiKhoan" asp-controller="Accounts" class="dropdown-item">Đăng ký</a>
+                                </div>
+                            </div>
+                        }
+                        <a asp-controller="Home" asp-action="Contact" class="nav-item nav-link">Liên hệ</a>
+                    </div>
+                    @*<div class="navbar-nav ml-auto py-0">
+                            <a href="dang-nhap.html" class="nav-item nav-link">Đăng nhập</a> <a href="" class="nav-item nav-link">|</a>
+                            <a href="dang-ky.html" class="nav-item nav-link">Đăng ký</a>
+                        </div>*@
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3"><span class="px-2">Địa chỉ giao hàng</span></h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="/">Trang chủ</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0">Địa chỉ giao hàng</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mb-5">
+    <div class="row border-top px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+            <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+                <div class="navbar-nav w-100 overflow-hidden" style="height: 310px">
+                    <a href="tai-khoan-cua-toi.html" class="nav-item nav-link">Thông tin tài khoản</a>
+                    <a href="doi-mk.html" class="nav-item nav-link">Đổi mật khẩu</a>
+                    <a href="dia-chi-giao-hang.html" class="nav-item nav-link active">Địa chỉ giao hàng</a>
+                    <a href="lich-su-dat-hang.html" class="nav-item nav-link">Lịch sử đặt hàng</a>
+                </div>
+            </nav>
+        </div>
+        <div class="col-lg-9">
+            <div class="card">
+                <div class="card-content">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <tbody>
+                                <tr>
+                                    <td> <b>Họ tên:</b></td>
+                                    <td> @Model.FullName</td>
+                                </tr>
+                                <tr>
+                                    <td> <b>Số điện thoại:</b></td>
+                                    <td> @Model.Phone</td>
+                                </tr>
+                                <tr>
+                                    <td> <b>Địa chỉ giao hàng:</b></td>
+                                    <td> @Model.Address</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

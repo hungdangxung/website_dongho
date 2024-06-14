@@ -1,0 +1,73 @@
+﻿@model DongHoDemo2.Models.Product
+
+@{
+    ViewData["Title"] = "Thêm mới sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Category cat = ViewBag.Cat;
+    Color color = ViewBag.Color;
+}
+<div class="header">
+    <h1 class="page-header">
+        Thêm mới sản phẩm
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+        <li><a asp-area="Admin" asp-controller="AdminProducts" asp-action="Index">Quản lý sản phẩm</a></li>
+        <li><a asp-area="Admin" asp-controller="AdminProducts" asp-action="Create">Thêm mới sản phẩm</a></li>
+    </ol>
+</div>
+<form asp-controller="AdminProducts" asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="card">
+        <div class="card-content">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td> <b>Danh mục sản phẩm:</b></td>
+                            <td> <select asp-for="CatId" class="form-control" asp-items="ViewBag.DanhMuc"></select></td>
+                        </tr>
+                        <tr>
+                            <td> <b>Tên sản phẩm:</b></td>
+                            <td> <input type="text" class="form-control" asp-for="ProductName" placeholder="Tên sản phẩm"></td>
+                        </tr>
+                        <tr>
+                            <td> <b>Thương hiệu:</b></td>
+                            <td> <input type="text" class="form-control" asp-for="BrandName" placeholder="Thương hiệu"></td>
+                        </tr>
+                        <tr>
+                            <td> <b>Màu sắc:</b></td>
+                            <td> <select asp-for="ColorId" class="form-control" asp-items="ViewBag.MauSac"></select></td>
+                        </tr>
+                        <tr>
+                            <td> <b>Giá bán:</b></td>
+                            <td> <input type="text" class="form-control" asp-for="Price" placeholder="Giá bán"></td>
+                        </tr>
+                        <tr>
+                            <td> <b>Ảnh sản phẩm:</b></td>
+                            <td>
+                                <input name="fThumb" type="file" class="form-control-file" asp-for="Thumb">
+                                <span asp-validation-for="Thumb" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> <b>Số lượng:</b></td>
+                            <td> <input type="text" class="form-control" asp-for="UnitslnStock" placeholder="Số lượng"></td>
+                        </tr>
+                        <tr>
+                            <td> <b>Mô tả:</b></td>
+                            @*<td> <input type="text" class="form-control" asp-for="Description" placeholder="Mô tả"></td>*@
+                            <td> <textarea type="text" class="form-control" asp-for="Description" placeholder="Mô tả" rows="5"></textarea></td>
+                        </tr>
+                        @*@if(cat.PromotionId != null)
+        {
+            Model.Discount = Model.Price - cat.Promotion.PromotionPrice;
+        }*@
+                    </tbody>
+                </table>
+            </div>
+            <a class="btn btn-success btn-group m-md-3" asp-action="Index">Quay lại</a>
+            <button type="submit" class="btn btn-primary">Thêm mới</button>
+        </div>
+    </div>
+</form>

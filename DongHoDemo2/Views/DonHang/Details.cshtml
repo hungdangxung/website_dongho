@@ -1,0 +1,90 @@
+﻿@model DongHoDemo2.ModelViews.XemDonHang
+@{
+    var total = Model.ChiTietDonHang.Sum(x => x.Total).Value.ToString("#,##0");
+}
+<div style="border: 1px solid; background-color: beige">
+    <p><h3 style="text-align: center; color: forestgreen">THÔNG TIN ĐƠN HÀNG: @Model.DonHang.OrderCode</h3></p>
+    <br />
+    <div class="d-flex">
+        <div style="margin-left: 100px; width: 300px">
+            <p><b>Ngày đặt hàng:</b> @Model.DonHang.OrderDate.Value.ToString("dd/MM/yyyy")</p>
+            <p><b>Trạng thái đơn hàng:</b> @Model.DonHang.TransactStatus.Status</p>
+            @*<p><b>Tổng giá trị đơn hàng:</b> <strong> @total VNĐ</strong></p>*@
+
+            @if (Model.DonHang.ShipDate != null)
+            {
+                <p><b>Ngày ship hàng:</b> @Model.DonHang.ShipDate.Value.ToString("dd/MM/yyyy")</p>
+            }
+            else
+            {
+                <p><b>Ngày ship hàng:</b> Chưa có thông tin</p>
+            }
+
+
+            @if (Model.DonHang.ShipperID != null)
+            {
+                <p>
+                    <b>Người giao hàng:</b> @Model.DonHang.Shipper.ShipperName
+                </p>
+                <p>
+                    <b>SĐT:</b> @Model.DonHang.Shipper.Phone
+                </p>
+                <p>
+                    <b>Đơn vị vận chuyển:</b> @Model.DonHang.Shipper.Company
+                </p>
+            }
+            else
+            {
+                <p>
+                    <b>Người giao hàng:</b> Chưa có thông tin
+                </p>
+            }
+        </div>
+        <div style="margin-left: 350px; width: 350px">
+            <p><b>Người đặt:</b> @Model.DonHang.Customer.FullName</p>
+            <p><b>Số điện thoại:</b> @Model.DonHang.Customer.Phone</p>
+            <p><b>Địa chỉ:</b> @Model.DonHang.Customer.Address</p>
+            <p><b>Phương thức thanh toán:</b> Thanh toán khi nhận hàng</p>
+        </div>
+    </div>
+    <div class="table-responsive" style="width: 1220px; margin-left: 21px">
+        <table class="table table-danger table-hover" style="border: 1px #00ff21 solid">
+            <tbody>
+                <tr>
+                    <th>#</th>
+                    <th>Sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th width="100px">Màu sắc</th>
+                    <th>Đơn giá</th>
+                    <th>Thành tiền</th>
+                </tr>
+                @foreach (var item in Model.ChiTietDonHang)
+                {
+            <tr>
+                <td class="align-middle">@item.ProductId</td>
+                <td class="align-middle"><img src="~/images/products/@item.Product.Thumb" alt="@item.Product.ProductName" style="width: 50px;"> @item.Product.ProductName</td>
+                <td class="align-middle">@item.Quantity</td>
+                <td class="align-middle">@item.Color.ColorName</td>
+                @if (item.Product.Discount != null)
+                {
+                    <td class="align-middle">@item.Product.Discount.Value.ToString("#,##0") VNĐ</td>
+                }
+                else
+                {
+                    <td class="align-middle">@item.Product.Price.Value.ToString("#,##0") VNĐ</td>
+                }
+                <td class="align-middle">@item.Total.Value.ToString("#,##0") VNĐ</td>
+            </tr>
+                }
+                <tr>
+                    <td style="text-align: center" colspan="6"><b>Tổng giá trị đơn hàng: </b> @total VNĐ </td>
+                </tr>
+            </tbody>
+        </table>
+        @if (Model.DonHang.TransactStatusId == 4)
+        {
+            <a asp-action="DaNhanHang" asp-controller="DonHang" asp-route-id="@Model.DonHang.OrderId" style="margin-left: 900px" class="danhan btn btn-success">Đã nhận hàng</a>
+        }
+    </div>
+    <br />
+</div>
